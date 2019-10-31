@@ -9,5 +9,7 @@ setup(
 
     install_requires = [
         'wiki',
+        'mysqlclient',
+        'django-nyt',
     ]
 )
