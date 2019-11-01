@@ -17,9 +17,9 @@ from django.urls import reverse_lazy
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-PROJECT_DIR = BASE_DIR
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -40,6 +40,8 @@ WIKI_ACCOUNT_HANDLING = True
 WIKI_ACCOUNT_SIGNUP_ALLOWED = True
 LOGIN_REDIRECT_URL = reverse_lazy('wiki:get', kwargs={'path': ''})
 
+WIKI_ANONYMOUS_WRITE = False
+WIKI_CACHE_TIMEOUT = 60
 
 # Application definition
 
@@ -80,7 +82,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'APP_DIRS': True,
-        # ...
+        'DIRS': [
+            os.path.join(PROJECT_DIR, 'templates'),
+        ],
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
